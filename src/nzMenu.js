@@ -10,10 +10,12 @@
 		};
 
 		this.setPositionFn = function(_positionFn) {
-			positionFn = _positionFn;
+			if (angular.isFunction(_positionFn)) {
+				positionFn = _positionFn;
+			}
 		};
 
-		this.$get = function($log) {
+		this.$get = function() {
 			return {
 				getPositionFn: function() {
 					return positionFn;
