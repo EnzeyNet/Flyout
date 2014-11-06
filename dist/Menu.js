@@ -3,12 +3,28 @@
 
 	var module = angular.module('net.enzey.menu', ['net.enzey.services']);
 
-	module.directive('nzMenu', function ($compile, $parse, $document, $timeout, nzService) {
-		var defaultPositionFn = function(menuElem, contextElem, mouseEvent) {
+	module.provider('nzMenuConfig', function () {
+		var positionFn = function(menuElem, contextElem, mouseEvent) {
 			menuElem.css('position', 'absolute');
 			contextElem.append(menuElem);
 		};
 
+		this.setPositionFn = function(_positionFn) {
+			if (angular.isFunction(_positionFn)) {
+				positionFn = _positionFn;
+			}
+		};
+
+		this.$get = function() {
+			return {
+				getPositionFn: function() {
+					return positionFn;
+				}
+			};
+		};
+	});
+
+	module.directive('nzMenu', function ($compile, $parse, $document, $timeout, nzService, nzMenuConfig) {
 		return {
 			compile: function ($element, $attrs) {
 				//var html = $element.html();
@@ -19,13 +35,13 @@
 					pre: function (scope, element, attrs) {
 						if (!element.attr('isLifted')) {
 							var positionFn = $parse(attrs.positionFn)(scope);
-							if (!positionFn) {positionFn = defaultPositionFn;}
+							if (!positionFn) {positionFn = nzMenuConfig.getPositionFn();}
 							var contextObj = element.parent();
 							contextObj.on('click', function(event) {
 								if (!currentlyDisplayed) {
 									currentlyDisplayed = true;
 									var renderedHtml = $compile(html)(scope);
-									defaultPositionFn(renderedHtml, contextObj, event);
+									positionFn(renderedHtml, contextObj, event);
 									nzService.registerClickAwayAction(contextObj, function(event) {
 										renderedHtml.remove();
 										currentlyDisplayed = false;

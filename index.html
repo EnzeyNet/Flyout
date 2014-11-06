@@ -5,14 +5,32 @@
 
 		<script src="example.js"></script>
 		<script src="dist/Menu.js"></script>
-		<script src="lib/nsZervices.js"></script>
+		<script src="lib/nzServices.js"></script>
 
 		<style>
 			 *, *:before, *:after {
 			  -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
 			 }
+			 .thing {
+				fill: red;
+			}
 		</style>
 
+		<style>
+			svg .shell {
+			stroke: #006600;
+			}
+			svg .top {
+				fill: #006600;
+			}
+			svg .foo {
+				stroke: green;
+			}
+			svg .foo2 {
+				stroke: red;
+			}
+svg {background-color: blue;}
+		</style>
 	</head>
 	<body>
 
@@ -23,6 +41,13 @@
 				<span>{{foo}}</span>
 		</div>
 				<div>foo</div>
+				<div style="position: relative; display: inline;">
+<embed src="kiwi.svg"  class="thing" style="position: relative; display: inline; "/>
+				</div>
 
+				<svg>
+				<circle cx="50" cy="50" r="40" stroke="black" stroke-width="3" fill="red"/>
+				</svg>
+				<svg xmlns="http://www.w3.org/2000/svg" version="1.1" x="0px" y="0px" width="30" height="30" viewBox="0, 0, 30, 30"><g display="none"><image opacity="1" x="0" y="0" width="30" height="30" preserveAspectRatio="none" clip-path="url(#Clip_1)"/></g><path d="M14.969-0.04C16.785 0.052 17.392 0.005 19.435 0.635 24.097 2.071 27.892 5.842 29.338 10.503 29.898 12.309 30.23 14.58 29.938 16.5 29.789 17.487 29.633 18.479 29.338 19.432 27.893 24.099 24.102 27.889 19.435 29.335 17.392 29.968 16.786 29.921 14.969 30.013 13.154 29.921 12.547 29.968 10.507 29.335 2.605 26.884-1.779 18.337 0.638 10.503 2.075 5.847 5.85 2.072 10.507 0.635 11.458 0.341 12.459 0.236 13.435 0.037zM14.956 6.006C12.064 11.013 9.175 16.022 6.283 21.028"/><path d="23.629 21.028C20.746 16.035 17.863 11.042 14.981 6.049zM16.01 10.741"/><path class="foo2" d="16.01 15.997 13.983 15.997 13.983 10.741zM16.01 16.982"/><path class="foo" d="M16.01 19.011 14.014 19.011 14.014 16.982zM14.969-0.04C16.785 0.052 17.392 0.005 19.435 0.635 24.097 2.071 27.892 5.842 29.338 10.503 29.898 12.309 30.23 14.58 29.938 16.5 29.789 17.487 29.633 18.479 29.338 19.432 27.893 24.099 24.102 27.889 19.435 29.335 17.392 29.968 16.786 29.921 14.969 30.013 13.154 29.921 12.547 29.968 10.507 29.335 2.605 26.884-1.779 18.337 0.638 10.503 2.075 5.847 5.85 2.072 10.507 0.635 11.458 0.341 12.459 0.236 13.435 0.037zM14.956 6.006C12.064 11.013 9.175 16.022 6.283 21.028"/><path d="23.629 21.028C20.746 16.035 17.863 11.042 14.981 6.049zM16.01 10.741"/><path d="16.01 15.997 13.983 15.997 13.983 10.741zM16.01 16.982"/><path d="16.01 19.011 14.014 19.011 14.014 16.982z" fill="#E6BC15"/><defs><clipPath><path d="M0 0"/><path d="30 0 30 30 0 30z"/></clipPath></defs></svg>
 	</body>
 </html>
