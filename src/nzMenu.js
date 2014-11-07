@@ -4,9 +4,9 @@
 	var module = angular.module('net.enzey.menu', ['net.enzey.services']);
 
 	module.provider('nzMenuConfig', function () {
-		var positionFn = function(menuElem, contextElem, mouseEvent) {
-			menuElem.css('position', 'absolute');
-			contextElem.append(menuElem);
+		var positionFn = function(flyoutElem, contextElem, mouseEvent) {
+			flyoutElem.css('position', 'absolute');
+			contextElem.append(flyoutElem);
 		};
 
 		this.setPositionFn = function(_positionFn) {
@@ -26,6 +26,7 @@
 
 	module.directive('nzMenu', function ($compile, $parse, $document, $timeout, nzService, nzMenuConfig) {
 		return {
+			priority: 9999,
 			compile: function ($element, $attrs) {
 				//var html = $element.html();
 				//$element.html('');
