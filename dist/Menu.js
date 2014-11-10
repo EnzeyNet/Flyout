@@ -24,26 +24,31 @@
 		};
 	});
 
-	module.directive('nzMenu', function ($compile, $parse, $document, $timeout, nzService, nzMenuConfig) {
+	module.directive('nzMenu', function ($compile, $parse, nzService, nzMenuConfig) {
 		return {
+			scope: true,
 			priority: 9999,
 			compile: function ($element, $attrs) {
-				//var html = $element.html();
-				//$element.html('');
 				var currentlyDisplayed = false;
+
+				var html;
+				if (!$element.attr('isLifted')) {
+					var html = $element[0].outerHTML;
+				}
 
 				return {
 					pre: function (scope, element, attrs) {
 						if (!element.attr('isLifted')) {
+							var parentElem = $element.parent();
 							var positionFn = $parse(attrs.positionFn)(scope);
 							if (!positionFn) {positionFn = nzMenuConfig.getPositionFn();}
-							var contextObj = element.parent();
-							contextObj.on('click', function(event) {
+
+							parentElem.on('click', function(event) {
 								if (!currentlyDisplayed) {
 									currentlyDisplayed = true;
 									var renderedHtml = $compile(html)(scope);
-									positionFn(renderedHtml, contextObj, event);
-									nzService.registerClickAwayAction(contextObj, function(event) {
+									positionFn(renderedHtml, parentElem, event);
+									nzService.registerClickAwayAction(parentElem, function(event) {
 										renderedHtml.remove();
 										currentlyDisplayed = false;
 									});
@@ -51,8 +56,8 @@
 								}
 							});
 
+							// Configure click action
 							element.attr('isLifted', true);
-							var html = element[0].outerHTML;
 							element.remove();
 						}
 					},
