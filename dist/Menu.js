@@ -33,7 +33,7 @@
 		this.setPositionFn(defaultPositionFn);
 	});
 
-	module.directive('nzFlyout', function ($compile, $parse, $document, nzService, nzFlyoutConfig) {
+	module.directive('nzFlyout', ['$compile', '$parse', '$document', 'nzService', 'nzFlyoutConfig', function ($compile, $parse, $document, nzService, nzFlyoutConfig) {
 		return {
 			priority: 9999,
 			compile: function ($element, $attrs) {
@@ -106,6 +106,6 @@
 			}
 		};
 
-	});
+	}]);
 
 })(angular);
