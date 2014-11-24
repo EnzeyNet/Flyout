@@ -2,7 +2,7 @@
     "use strict";
 
 	var module = angular.module('net.enzey.flyout', ['net.enzey.services']);
-	var eventReposition = 'NZ_EVENT_REPOSITION';
+	var repositionEventTrigger = 'NZ_EVENT_REPOSITION';
 
 	module.provider('nzFlyoutConfig', function () {
 		var defaultPositionFn = function(flyoutElem, contextElem, mouseEvent) {
@@ -88,7 +88,7 @@
 										currentlyDisplayed = false;
 									}, parentElem, renderedHtml);
 									childScope.$apply();
-									childScope.$on(eventReposition, function() {
+									childScope.$on(repositionEventTrigger, function() {
 										positionFn(renderedHtml, positionAgainstElem, appendToElem, event);
 									});
 								}
