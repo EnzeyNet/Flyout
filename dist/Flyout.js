@@ -36,8 +36,10 @@
 	module.directive('nzFlyout', ['$compile', '$parse', '$document', 'nzService', 'nzFlyoutConfig', function ($compile, $parse, $document, nzService, nzFlyoutConfig) {
 		return {
 			priority: 9999,
+			terminal: true,
 			compile: function ($element, $attrs) {
 				var directiveName = this.name;
+				var directivePriority = this.priority;
 				var currentlyDisplayed = false;
 
 				var html = $element[0].outerHTML;
@@ -75,7 +77,7 @@
 							if (!currentlyDisplayed) {
 								currentlyDisplayed = true;
 								var childScope = scope.$new();
-								var renderedHtml = $compile(html)(childScope);
+								var renderedHtml = $compile(html, null, directivePriority)(childScope);
 								positionFn(renderedHtml, positionAgainstElem, appendToElem, event);
 								nzService.registerClickAwayAction(function(event) {
 									renderedHtml.remove();
@@ -89,8 +91,6 @@
 							}
 						});
 
-						// Configure click action
-						html = angular.element(html).attr('isLifted', true)[0].outerHTML;
 						element.remove();
 					},
 					post: function (scope, element, attrs, controllers) {
