@@ -42,6 +42,9 @@
 				var directivePriority = this.priority;
 				var currentlyDisplayed = false;
 
+				var iframeShim = angular.element('<iframe class="shim"></iframe>');
+				$element[0].insertBefore(iframeShim[0], $element[0].childNodes[0]);
+
 				var html = $element[0].outerHTML;
 
 				return {
